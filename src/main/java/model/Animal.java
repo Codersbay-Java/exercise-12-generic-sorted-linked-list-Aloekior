@@ -1,7 +1,7 @@
 package model;
 
 public class Animal implements Comparable<Animal> {
-	String name;
+    private String name;
 
     public Animal(String name) {
         this.name = name;
@@ -12,7 +12,7 @@ public class Animal implements Comparable<Animal> {
         return "| " + name + " |";
     }
 
-    public int compareTo(Animal input) {
-        return this.name.compareTo(input.name);
+    public int compareTo(Animal other) {
+        return name.compareTo(other.name);
     }
 }

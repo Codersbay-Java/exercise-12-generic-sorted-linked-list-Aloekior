@@ -1,16 +1,12 @@
 package list;
 
 public class SortedLinkedList<S extends Comparable<S>> implements SortedList<S> {
-    Node<S> head;
+    private Node<S> head;
     int size = 0;
-
-    private boolean isEmpty() {
-        return size == 0;
-    }
 
     @Override
     public void insert(S element) {
-        if (isEmpty()) {
+        if (size == 0) {
             head = new Node<S>(element);
         } else {
             Node<S> newNode = new Node<S>(element);
@@ -30,7 +26,6 @@ public class SortedLinkedList<S extends Comparable<S>> implements SortedList<S> 
             }
         }
         size++;
-
     }
 
     @Override
@@ -39,26 +34,48 @@ public class SortedLinkedList<S extends Comparable<S>> implements SortedList<S> 
         Node<S> prev = head;
         int count = 0;
 
-        while (current.next != null && count < index) {
-            prev = current;
-            current = current.next;
-            count++;
+        if (!isInRange(index)) {
+            return false;
         }
-        prev.setNext(current.next);
+
+        if (index == 0) {
+            if (size == 1) {
+                head = null;
+            } else {
+                head = head.next;
+            }
+        } else {
+            for (int i = 0; i < index; i++) {
+                prev = current;
+                current = current.next;
+            }
+            prev.setNext(current.next);
+        }
         size--;
 
         return true;
     }
 
+    private boolean isInRange(int index) {
+        if (size == 0 || index < 0 || index > size - 1) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public S get(int index) {
-        Node<S> current = head;
-        int count = 0;
+        if (isInRange(index)) {
+            Node<S> current = head;
+            int count = 0;
 
-        while (current.next != null && count < index) {
-            current = current.next;
+            while (current.next != null && count < index) {
+                current = current.next;
+                count++;
+            }
+            return current.getValue();
         }
-        return current.getValue();
+        return null;
     }
 
     @Override
