@@ -31,6 +31,9 @@ totally fine.
 ## Questions
 * How can you change the ordering of the list? From ascending 
 to descending. Name at least two different methods.
+~~~java
+
+~~~
 * Can the inner Node class be static? Justify your answer.
 * Can you name the generic placeholder `Placeholder` instead of
 `T`? If yes should you, do it?
